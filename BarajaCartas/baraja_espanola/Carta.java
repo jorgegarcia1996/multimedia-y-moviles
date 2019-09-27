@@ -1,37 +1,38 @@
 package baraja_espanola;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Carta {
-	
+
 	private String palo;
 	private Integer num;
-	
+
 	@SuppressWarnings("serial")
-	private ArrayList<String> palos = new ArrayList<String>() {
+	private HashMap<Integer, String> cartasEspeciales = new HashMap<Integer, String>() {
 		{
-			add("oros");
-			add("bastos");
-			add("espadas");
-			add("copas");
+			put(1, "as");
+			put(10, "sota");
+			put(11, "caballo");
+			put(12, "rey");
 		}
 	};
-	
-	
-	//Constructor
-	public Carta() {
-		super();
-		this.num = (int)(Math.random() * 12 + 1);
-		this.palo = palos.get((int)(Math.random() * 4));
-	}
 
+	// Constructor
+	public Carta(String palo, Integer num) {
+		super();
+		this.palo = palo;
+		this.num = num;
+	}
 
 	@Override
 	public String toString() {
-		return num + " de " + palo;
+		String result;
+		if (cartasEspeciales.containsKey(num)) {
+			result = cartasEspeciales.get(num) + " de " + palo;
+		} else {
+			result = num + " de " + palo;
+		}
+		return result;
 	}
-	
-	
-	
-	
+
 }
